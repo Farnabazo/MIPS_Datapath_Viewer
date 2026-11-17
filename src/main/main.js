@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes.js');
+const CPU = require('./Sim/CPU.js');
 
 const app = express();
 
@@ -18,4 +19,5 @@ app.use((req, res) => {
 
 app.listen(8000, '127.0.0.1', () => {
   console.log('Server in ascolto su http://localhost:8000');
+  CPU.start();
 });
