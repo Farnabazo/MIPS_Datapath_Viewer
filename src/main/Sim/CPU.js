@@ -1,25 +1,26 @@
+const { control_unit } = require('./control_unit.js');
 const { ALU } = require('./ALU.js');
 const { Memory } = require('./memory.js');
 const { program_counter } = require('./program_counter.js');
 const { instruction_register } = require('./instruction_register.js');
 const { INSTRUCTIONS } = require('./instructions.js');
 
-const STATES = [
-    FETCH,
-    DECODE,
-    EXECUTE,
-    ACCESS_MEMORY,
-    WRITE_OUT
-];
-
 function start() {
+    var cu = new control_unit();
     var pc = new program_counter();
     var memory = new Memory();
-    var IR = new instruction_register(); 
-    var starting_address = pc.address;
+    var IR = new instruction_register();
+
+    var starting_address = pc.read();
     console.log('PC starts at address ' + starting_address + '.');
-    console.log('Reading instruction at address ' + starting_address + '...');
-    current_instruction = memory.read(starting_address);
+    console.log('Reading memory at address ' + starting_address + '...');
+
+    console.log('Reading control unit signals...');
+    var IorD = cu.read_signals();
+    if(IorD == 0) {
+        console.log('Control unit signals reading instruction memory');
+        current_instruction = memory.read_instruction(starting_address);
+    }
     console.log('Memory starts with instruction ' + current_instruction.name + ', format: ' + current_instruction.format + '.');
     console.log('Instruction contains: ');
     var fields = current_instruction.fields;

@@ -9,7 +9,7 @@ class Memory {
         console.log('Memory initialized with instruction ' + this.instructions[0].name);
     }
 
-    read(address) {
+    read_instruction(address) {
         return { 
             name: this.instructions[address].name,
             format: this.instructions[address].format,
