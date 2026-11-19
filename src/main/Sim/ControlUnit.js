@@ -17,7 +17,7 @@ const COMMAND_SIGNALS = {
     PCWrite: 0,
     PCWriteCond: 0,
     ExtOp: 0,
-    ALUOp: 0
+    ALUOp: 'ADDU'
 };
 
 const STATES = {
@@ -42,6 +42,9 @@ const TRANS_MAP = {
         JUMP: 'JUMP_EXEC',
         ADDU: 'EXECUTE'
     },
+    JUMP_EXEC: {
+        NEXT: 'FETCH'
+    },
     EXECUTE: {
         NEXT: 'RF_WRITE'
     },
@@ -56,8 +59,18 @@ const SIGNALS_MAP = {
         ALUSrcA: 0,
         IorD: 0,
         IRWrite: 1,
-        ALUSrcB: 1,
-        ALUOp: 0,
+        ALUSrcB: 0,
+        ALUOp: 'ADDU',
+        PCWrite: 1,
+        PCSrc: 0
+    },
+        DECODE: {
+        MemRead: 1,
+        ALUSrcA: 0,
+        IorD: 0,
+        IRWrite: 1,
+        ALUSrcB: 3,
+        ALUOp: 'ADDU',
         PCWrite: 1,
         PCSrc: 0
     }
@@ -74,9 +87,9 @@ class ControlUnit {
         return this.signals;
     }
 
-    transiction(input) {
+    transition(input = 'NEXT') {
         let current_state = this.state;
-        next_state = TRANS_MAP[current_state][input];
+        let next_state = TRANS_MAP[current_state][input];
         if(next_state) {
             this.state = next_state;
             this.signals = SIGNALS_MAP[next_state];

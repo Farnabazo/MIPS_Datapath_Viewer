@@ -1,7 +1,7 @@
 const INSTRUCTIONS = {
     ADDU: {
         name: 'ADDU',
-        format: 'type',
+        format: 'R',
         fields: {
             opcode: '000000',
             rs: '00000',
