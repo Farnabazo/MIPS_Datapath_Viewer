@@ -17,7 +17,8 @@ const INSTRUCTIONS = {
     SUB: 'SUB',
     LW: 'LW',
     SW: 'SW',
-    BEQ: 'BEQ'
+    BEQ: 'BEQ',
+    JUMP: 'JUMP'
 };
 
 module.exports = {

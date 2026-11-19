@@ -1,4 +1,4 @@
-class program_counter {
+class ProgramCounter {
 
     constructor(address = 0) {
         this.address = address;
@@ -19,5 +19,5 @@ class program_counter {
 }
 
 module.exports = {
-    program_counter
+    ProgramCounter
 };

@@ -1,4 +1,4 @@
-class instruction_register{
+class InstructionRegister{
 
     constructor(instruction) {
         this.instruction = instruction;
@@ -15,5 +15,5 @@ class instruction_register{
 }
 
 module.exports = {
-    instruction_register
+    InstructionRegister
 };
